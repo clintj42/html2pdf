@@ -1,6 +1,6 @@
 /**
  * html2pdf.js v0.8.2
- * Copyright (c) 2017 Erik Koopmans
+ * Copyright (c) 2018 Erik Koopmans
  * Released under the MIT License.
  */
 (function (global, factory) {
@@ -235,9 +235,9 @@ var html2pdf = function html2pdf(source, opt) {
   var done = function done(canvas) {
     onRendered(canvas);
     document.body.removeChild(overlay);
-    html2pdf.makePDF(canvas, pageSize, opt);
+    return html2pdf.makePDF(canvas, pageSize, opt);
   };
-  html2canvas(container, opt.html2canvas).then(done);
+  return html2canvas(container, opt.html2canvas).then(done);
 };
 
 html2pdf.parseInput = function (source, opt) {
@@ -369,7 +369,7 @@ html2pdf.makePDF = function (canvas, pageSize, opt) {
   }
 
   // Finish the PDF.
-  pdf.save(opt.filename);
+  return pdf.output('datauristring');
 };
 
 return html2pdf;

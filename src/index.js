@@ -54,9 +54,9 @@ var html2pdf = function(source, opt) {
   var done = function(canvas) {
     onRendered(canvas);
     document.body.removeChild(overlay);
-    html2pdf.makePDF(canvas, pageSize, opt);
+    return html2pdf.makePDF(canvas, pageSize, opt);
   };
-  html2canvas(container, opt.html2canvas).then(done);
+  return html2canvas(container, opt.html2canvas).then(done);
 };
 
 html2pdf.parseInput = function(source, opt) {
@@ -189,7 +189,7 @@ html2pdf.makePDF = function(canvas, pageSize, opt) {
   }
 
   // Finish the PDF.
-  pdf.save( opt.filename );
+  return pdf.output('datauristring');
 }
 
 
